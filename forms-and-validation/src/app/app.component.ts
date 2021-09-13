@@ -12,7 +12,12 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)])
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+
+      address: new FormGroup({
+        country: new FormControl('ru'),
+        city: new FormControl('', Validators.required)
+      })
     })
   }
 
@@ -23,5 +28,16 @@ export class AppComponent implements OnInit{
 
       console.log('Form data:', formData)
     }
+  }
+
+  setCapital() {
+    const cityMap:any = {
+      ru: 'Moscow',
+      ua: 'Kiev',
+      by: 'Minsk'
+    }
+    const cityKey = this.form.get('address.country')?.value
+    const city = cityMap[cityKey]
+    this.form.patchValue({address: {city}})
   }
 }

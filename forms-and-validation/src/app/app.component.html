@@ -16,17 +16,17 @@
       <input type="password" placeholder="Пароль" formControlName="password">
       <div *ngIf="form.controls.password.invalid && form.controls.password.touched" class="validation">
         <small *ngIf="form.controls.password.errors?.required">Password cant be empty</small>
-        <small>Please enter at lest 6 character</small>
+        <small *ngIf="form.controls.password.errors?.minlength">Please enter at lest 6 character</small>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" formGroupName="address">
       <h2>Адрес</h2>
 
       <div class="form-control">
         <label>Страна</label>
 
-        <select>
+        <select formControlName="country">
           <option value="ru">Россия</option>
           <option value="ua">Украина</option>
           <option value="by">Беларусь</option>
@@ -34,10 +34,10 @@
       </div>
 
       <div class="form-control">
-        <input type="text">
+        <input type="text" formControlName="city" placeholder="City">
       </div>
 
-      <button class="btn" type="button">Выбрать столицу</button>
+      <button class="btn" type="button" (click)="setCapital()">Выбрать столицу</button>
     </div>
 
     <div class="card">
