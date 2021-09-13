@@ -5,13 +5,19 @@
     <div class="form-control">
       <label>Email</label>
       <input type="text" placeholder="Email" formControlName="email">
-      <div class="validation"></div>
+      <div *ngIf="form.controls.email.invalid && form.controls.email.touched" class="validation">
+        <small *ngIf="form.controls.email.errors?.required">Email can't be empty</small>
+        <small *ngIf="form.controls.email.errors?.email">Please enter valid email</small>
+      </div>
     </div>
 
     <div class="form-control">
       <label>Пароль</label>
       <input type="password" placeholder="Пароль" formControlName="password">
-      <div class="validation"></div>
+      <div *ngIf="form.controls.password.invalid && form.controls.password.touched" class="validation">
+        <small *ngIf="form.controls.password.errors?.required">Password cant be empty</small>
+        <small>Please enter at lest 6 character</small>
+      </div>
     </div>
 
     <div class="card">
